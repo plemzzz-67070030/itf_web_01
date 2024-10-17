@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Lab14style.css"> 
+</head>
+<body>
+    <center>
+        <h1>
+            <a href="https://www.facebook.com/profile.php?id=100012817812455" class="username">Hello World</a>
+        </h1>
+        <div id="profile" style="position: relative; height: 300px; width: 300px; background-image: url(https://th.bing.com/th/id/OIP.zlt1u36lMm8-TJhG8kcveQHaEG?w=297&h=180&c=7&r=0&o=5&pid=1.7); border-radius: 100%; background-position: center; background-size: cover; margin: 30px;"> 
+            <div style="position:  absolute; bottom: 0; right: 15px; height: 50px; width: 50px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center;"></div>
+        </div>
+        <div>
+            <label for="">Set username</label>
+            <input type="text" id="new-username" placeholder="Enter Username"><button onclick="updateUsername()">Set</button>
+        </div>
+        <div>
+            <label for="">Set Image</label>
+            <input type="text" placeholder="Enter" id="input2"><button onclick="setimage()">Set</button>
+        </div>
+
+        <div>Phone Number List</div>
+        <div class="input-group">
+            <input type="text" id="name" placeholder="Enter Name">
+            <input type="tel" id="phone" placeholder="Enter Phone Number">
+            <button onclick="addContact()">Add</button>
+            <button onclick="exportContacts()">Export</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody id="contact-list">
+            </tbody>
+        </table>
+    </center>
+    <script>
+        const username = document.getElementById("username");
+        const profile = document.getElementById("profile");
+        const input2 = document.getElementById("input2");
+        const contacts = [];
+
+        username.textContent = "Hello";
+
+        function updateUsername() {
+            var newUsername = document.getElementById("new-username").value;
+            if (newUsername) {
+                document.querySelector(".username").textContent = newUsername;
+            }
+        }
+
+        function setimage(){
+            profile.style.backgroundImage = "url("+ input2.value +")";
+            input2.value = "";
+        };
+
+        function addContact() {
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+
+            if (name && phone) {
+                contacts.push({ name, phone });
+                updateContactList();
+                clearInputFields();
+            }
+        }
+
+        function updateContactList() {
+            const contactList = document.getElementById('contact-list');
+            contactList.innerHTML = '';
+            contacts.forEach((contact, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td>${contact.name}</td><td>${contact.phone}</td>`;
+                contactList.appendChild(row);
+            });
+        }
+
+        function clearInputFields() {
+            document.getElementById("name").value = '';
+            document.getElementById("phone").value = '';
+        }
+
+        function exportContacts() {
+            var csvContent = "data:text/csv;charset=utf-8,Name,Phone\n";
+            contacts.forEach(function(contact) {
+                csvContent += `${contact.name},${contact.phone}\n`;
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "contacts.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

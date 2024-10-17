@@ -1,0 +1,40 @@
+* {
+    background-color: rgb(73, 154, 215);
+}
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+th {
+    background-color: #f0f0f0;
+}
+.contact-list {
+    margin-top: 20px;
+}
+h1 {
+    font-size: 60px;
+    color: rgb(55, 5, 89);
+}
+
+input[type="text"], input[type="tel"] {
+    padding: 10px;
+    width: 200px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+a:hover{
+    color: rgb(234, 95, 95);
+}
